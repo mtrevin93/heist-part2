@@ -46,10 +46,12 @@ namespace princess_brides
             Bank bank = new Bank();
             if (Total >= bank.difficultyLevel)
             {
+                Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {bank.difficultyLevel}.");
                 Console.WriteLine("Success!");
             }
             else
             {
+                Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {bank.difficultyLevel}.");
                 Console.WriteLine("Failure!");
             }
         }
