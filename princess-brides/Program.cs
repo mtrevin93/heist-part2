@@ -37,23 +37,35 @@ namespace princess_brides
                 }
             }
             // Console.WriteLine(HeistTeam.TeamMembers.Count);
-
+            //Prompt user for number of trial runs
+            Console.WriteLine("Number of trial runs?");
+            int numRuns = int.Parse(Console.ReadLine());
             int Total = 0;
             foreach (Member member in HeistTeam.TeamMembers)
             {
                 Total += member.SkillLevel;
             }
             Bank bank = new Bank();
-            if (Total >= bank.difficultyLevel)
+            for (int i = 0; i < numRuns; i++)
             {
-                Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {bank.difficultyLevel}.");
+            int thisRunsDifficulty = bank.newLuckValue();
+            if (Total >= thisRunsDifficulty)
+            {
+                Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {thisRunsDifficulty}.");
                 Console.WriteLine("Success!");
             }
             else
             {
-                Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {bank.difficultyLevel}.");
+                Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {thisRunsDifficulty}.");
                 Console.WriteLine("Failure!");
+            }
             }
         }
     }
 }
+
+// Phase Six
+// The program should be updated to...
+
+// At the beginning of the program, prompt the user to enter the difficulty level of the bank.
+// At the end of the program, display a report showing the number of successful runs and the number of failed runs.
