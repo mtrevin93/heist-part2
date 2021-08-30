@@ -5,12 +5,12 @@ namespace princess_brides
 {
     class Program
     {
-        static void Main(string [] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Plan your Heist!");
-            
+
             Team HeistTeam = new Team();
-        
+
             while (true)
             {
                 {
@@ -32,15 +32,25 @@ namespace princess_brides
                     if (member.Name != "")
                     {
                         HeistTeam.TeamMembers.Add(member);
-                        
+
                     }
                 }
             }
-            Console.WriteLine(HeistTeam.TeamMembers.Count);
-            
+            // Console.WriteLine(HeistTeam.TeamMembers.Count);
+
+            int Total = 0;
             foreach (Member member in HeistTeam.TeamMembers)
             {
-                Console.WriteLine(member.DisplayMember(member));
+                Total += member.SkillLevel;
+            }
+            Bank bank = new Bank();
+            if (Total >= bank.difficultyLevel)
+            {
+                Console.WriteLine("Success!");
+            }
+            else
+            {
+                Console.WriteLine("Failure!");
             }
         }
     }
