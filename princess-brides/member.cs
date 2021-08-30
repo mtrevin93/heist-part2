@@ -4,7 +4,7 @@ namespace princess_brides
 {
     public class Member
     {
-        public string Name { get; set;}
+        public string Name { get; set; }
 
         public int SkillLevel { get; set; }
 
@@ -12,14 +12,14 @@ namespace princess_brides
 
         public Member()
         {
-            
+
         }
 
         public string DisplayMember(Member member)
         {
-           return (
-            $"Name - {member.Name}, Skill Level - {member.SkillLevel},  Courage Factor - {member.CourageFactor}"
-               );
+            return (
+                $"Name - {member.Name}, Skill Level - {member.SkillLevel},  Courage Factor - {member.CourageFactor}"
+                    );
         }
     }
 }
