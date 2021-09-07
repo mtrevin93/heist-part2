@@ -31,11 +31,6 @@ namespace princess_brides
                     Console.WriteLine("Please enter their courage factor!");
                     member.CourageFactor = float.Parse(Console.ReadLine());
 
-                    if (member.Name != "")
-                    {
-                        HeistTeam.TeamMembers.Add(member);
-
-                    }
                 }
             }
             // Console.WriteLine(HeistTeam.TeamMembers.Count);
