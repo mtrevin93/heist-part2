@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Heist
 {
@@ -13,10 +14,11 @@ namespace Heist
             Console.WriteLine("Plan your Heist!");
             Console.WriteLine(bank.IsSecure);
             //Create a team
-            Team Rolodex = new Team();
+            List<IRobber> Rolodex = new List<IRobber>();
             Hacker Kevin = new Hacker() { Name = "Kevin", PercentageCut = 15 };
             Muscle Cena = new Muscle() { Name = "Cena", PercentageCut = 20 };
             LockSpecialist Rouge = new LockSpecialist() { Name = "Rouge", PercentageCut = 25 };
+            Rolodex.Add(Kevin);
             //Run until user does not enter name
             // while (true)
             // {
@@ -45,7 +47,7 @@ namespace Heist
             int Total = 0;
             int successes = 0;
             int failures = 0;
-            foreach (Robber robber in Rolodex.TeamMembers)
+            foreach (IRobber robber in Rolodex)
             {
                 Total += robber.SkillLevel;
             }
