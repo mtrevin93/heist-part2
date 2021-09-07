@@ -19,29 +19,46 @@ namespace Heist
             Muscle Cena = new Muscle() { Name = "Cena", PercentageCut = 20 };
             LockSpecialist Rouge = new LockSpecialist() { Name = "Rouge", PercentageCut = 25 };
             Rolodex.Add(Kevin);
-            //Run until user does not enter name
-            // while (true)
-            // {
-            //     {
-            //         Console.WriteLine("Please enter your team Robbers name!");
-            //         Robber robber = new Robber();
+            Rolodex.Add(Cena);
+            Rolodex.Add(Rouge);
+            // Run until user does not enter name
+            while (true)
+            {
+                {
+                    Console.WriteLine($"There are currently {Rolodex.Count} robbers in this heist.");
+                    Console.WriteLine("Please enter your team member's name!");
 
-            //         robber.Name = Console.ReadLine();
-            //         if (robber.Name == "")
-            //         {
-            //             break;
-            //         }
+                    string robberName = Console.ReadLine();
+                    if (robberName == "")
+                    {
+                        break;
+                    }
+                    Console.WriteLine("Please pick a specialization \n 1) Hacker (Disables alarm) \n 2) Muscle (Disarms guards) \n 3) Lock Specialist (cracks vault)");
+                    int memberType = int.Parse(Console.ReadLine());
 
-            //         Console.WriteLine("Please enter their skill level!");
-            //         robber.SkillLevel = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter their skill level!");
+                    int memberSkillLevel = int.Parse(Console.ReadLine());
 
-            //         Console.WriteLine("Please enter their courage factor!");
-            //         robber.CourageFactor = float.Parse(Console.ReadLine());
-            //         Rolodex.Add(robber);
-            //     }
-            // }
-            // Console.WriteLine(Rolodex.TeamRobbers.Count);
-            //Prompt user for number of trial runs
+                    Console.WriteLine("Please enter their courage factor!");
+                    float memberCourageFactor = float.Parse(Console.ReadLine());
+
+                    //Instantiate new member based on selected class
+                    if (memberType == 1){
+                        Hacker Robber = new Hacker() { Name = robberName, SkillLevel = memberSkillLevel, CourageFactor = memberCourageFactor };
+                        Rolodex.Add(Robber);
+                    }
+                    if (memberType == 2){
+                        Muscle Robber = new Muscle() { Name = robberName, SkillLevel = memberSkillLevel, CourageFactor = memberCourageFactor };
+                        Rolodex.Add(Robber);
+                    }
+                    if (memberType == 3){
+                        LockSpecialist Robber = new LockSpecialist() { Name = robberName, SkillLevel = memberSkillLevel, CourageFactor = memberCourageFactor };
+                        Rolodex.Add(Robber);
+                    }
+                }
+            }
+            Console.WriteLine(Rolodex.Count);
+            // Prompt user for number of trial runs
             Console.WriteLine("Number of trial runs?");
             int numRuns = int.Parse(Console.ReadLine());
             int Total = 0;
