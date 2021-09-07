@@ -16,33 +16,33 @@ namespace princess_brides
             while (true)
             {
                 {
-                    Console.WriteLine("Please enter your team members name!");
-                    Member member = new Member();
+                    Console.WriteLine("Please enter your team Robbers name!");
+                    Robber robber = new Robber();
 
-                    member.Name = Console.ReadLine();
-                    if (member.Name == "")
+                    robber.Name = Console.ReadLine();
+                    if (robber.Name == "")
                     {
                         break;
                     }
 
                     Console.WriteLine("Please enter their skill level!");
-                    member.SkillLevel = int.Parse(Console.ReadLine());
+                    robber.SkillLevel = int.Parse(Console.ReadLine());
 
                     Console.WriteLine("Please enter their courage factor!");
-                    member.CourageFactor = float.Parse(Console.ReadLine());
+                    robber.CourageFactor = float.Parse(Console.ReadLine());
 
                 }
             }
-            // Console.WriteLine(HeistTeam.TeamMembers.Count);
+            // Console.WriteLine(HeistTeam.TeamRobbers.Count);
             //Prompt user for number of trial runs
             Console.WriteLine("Number of trial runs?");
             int numRuns = int.Parse(Console.ReadLine());
             int Total = 0;
             int successes = 0;
             int failures = 0;
-            foreach (Member member in HeistTeam.TeamMembers)
+            foreach (Robber robber in HeistTeam.TeamMembers)
             {
-                Total += member.SkillLevel;
+                Total += robber.SkillLevel;
             }
             //Runs randomized trial runs
             for (int i = 0; i < numRuns; i++)

@@ -2,7 +2,7 @@ using System;
 
 namespace princess_brides
 {
-    public class Member
+    public class Robber
     {
         public string Name { get; set; }
 
@@ -10,15 +10,15 @@ namespace princess_brides
 
         public float CourageFactor { get; set; }
 
-        public Member()
+        public Robber()
         {
 
         }
 
-        public string DisplayMember(Member member)
+        public string DisplayRobber(Robber robber)
         {
             return (
-                $"Name - {member.Name}, Skill Level - {member.SkillLevel},  Courage Factor - {member.CourageFactor}"
+                $"Name - {robber.Name}, Skill Level - {robber.SkillLevel},  Courage Factor - {robber.CourageFactor}"
                     );
         }
     }
