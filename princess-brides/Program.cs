@@ -9,10 +9,8 @@ namespace Heist
         {
             //Create a new bank
             Bank bank = new Bank();
-            Console.WriteLine("Bank Difficulty Level: ");
-            bank.difficultyLevel = int.Parse(Console.ReadLine());
-            Console.WriteLine("Plan your Heist!");
-            Console.WriteLine(bank.IsSecure);
+            bank.ReconReport();
+            Console.WriteLine("Plan your Heist! \n");
             //Create a team
             List<IRobber> Rolodex = new List<IRobber>();
             Hacker Kevin = new Hacker() { Name = "Kevin", PercentageCut = 15 };
@@ -26,7 +24,7 @@ namespace Heist
             {
                 {
                     Console.WriteLine($"There are currently {Rolodex.Count} robbers in this heist.");
-                    Console.WriteLine("Please enter your team member's name!");
+                    Console.WriteLine("Please enter your team member's name.");
 
                     string robberName = Console.ReadLine();
                     if (robberName == "")
@@ -36,23 +34,23 @@ namespace Heist
                     Console.WriteLine("Please pick a specialization \n 1) Hacker (Disables alarm) \n 2) Muscle (Disarms guards) \n 3) Lock Specialist (cracks vault)");
                     int memberType = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Please enter their skill level!");
+                    Console.WriteLine("Please enter their skill level. (1-100)");
                     int memberSkillLevel = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Please enter their courage factor!");
-                    float memberCourageFactor = float.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter their required percentage of cut (1-100).");
+                    int memberCutPercentage = int.Parse(Console.ReadLine());
 
                     //Instantiate new member based on selected class
                     if (memberType == 1){
-                        Hacker Robber = new Hacker() { Name = robberName, SkillLevel = memberSkillLevel, CourageFactor = memberCourageFactor };
+                        Hacker Robber = new Hacker() { Name = robberName, SkillLevel = memberSkillLevel, PercentageCut = memberCutPercentage };
                         Rolodex.Add(Robber);
                     }
                     if (memberType == 2){
-                        Muscle Robber = new Muscle() { Name = robberName, SkillLevel = memberSkillLevel, CourageFactor = memberCourageFactor };
+                        Muscle Robber = new Muscle() { Name = robberName, SkillLevel = memberSkillLevel, PercentageCut = memberCutPercentage };
                         Rolodex.Add(Robber);
                     }
                     if (memberType == 3){
-                        LockSpecialist Robber = new LockSpecialist() { Name = robberName, SkillLevel = memberSkillLevel, CourageFactor = memberCourageFactor };
+                        LockSpecialist Robber = new LockSpecialist() { Name = robberName, SkillLevel = memberSkillLevel, PercentageCut = memberCutPercentage };
                         Rolodex.Add(Robber);
                     }
                 }
