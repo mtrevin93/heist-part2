@@ -15,10 +15,10 @@ namespace Heist
 
         }
 
-        public string DisplayRobber(Robber robber)
+        public override string ToString()
         {
             return (
-                $"Name - {robber.Name}, Skill Level - {robber.SkillLevel},  Courage Factor - {robber.CourageFactor}"
+                $"Name - {Name}, Skill Level - {SkillLevel},  Courage Factor - {CourageFactor}"
                     );
         }
     }
