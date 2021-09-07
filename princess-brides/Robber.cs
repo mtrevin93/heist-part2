@@ -10,10 +10,7 @@ namespace Heist
 
         public float CourageFactor { get; set; }
 
-        public Robber()
-        {
-
-        }
+        public Robber() {}
 
         public override string ToString()
         {

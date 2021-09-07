@@ -3,12 +3,12 @@ using System;
 namespace Heist
 
 {
-    public class LockSpecialist : Robber, IRobber
+    public class Hacker : Robber, IRobber
     {
         public void PerformSkill(Bank bank)
         {
-            bank.VaultScore = bank.VaultScore - 50;
-            if (bank.VaultScore <= 0) {
+            bank.AlarmScore = bank.AlarmScore - 50;
+            if (bank.AlarmScore <= 0) {
                 Console.WriteLine($"{Name} has disabled the alarm system!");
             }
             else {

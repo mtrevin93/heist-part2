@@ -3,7 +3,7 @@ using System;
 namespace Heist
 
 {
-    public class LockSpecialist : Robber, IRobber
+    public class Muscle : Robber, IRobber
     {
         public void PerformSkill(Bank bank)
         {
