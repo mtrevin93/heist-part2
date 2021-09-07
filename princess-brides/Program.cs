@@ -24,7 +24,7 @@ namespace Heist
                     for(int i = 0; i < Rolodex.TeamMembers.Count; i++){
                         Console.WriteLine($"{i+1}) {Rolodex.TeamMembers[i]}");
                     }
-                    Console.WriteLine("Please enter a new potential team member's name.");
+                    Console.WriteLine("Add robbers to the list of contacts by entering a name:");
 
                     string robberName = Console.ReadLine();
                     if (robberName == "")
@@ -61,6 +61,15 @@ namespace Heist
             bank.ReconReport();
             while(true)
             {   
+                Console.WriteLine("Your Team: ");
+                foreach(IRobber robber in Crew.TeamMembers){
+                    Console.WriteLine($"{robber}");
+                }
+                Console.WriteLine($"Your Cut: {100-Crew.TotalPercentageCut()}%");
+                Console.WriteLine("-----------------------------------------------");
+                if (Rolodex.TeamMembers.Count == 0){
+                    break;
+                }
                 Console.WriteLine($"There are currently {Rolodex.TeamMembers.Count} robbers to choose from.");
                 for(int i = 0; i < Rolodex.TeamMembers.Count; i++){
                     Console.WriteLine($"{i+1}) {Rolodex.TeamMembers[i]}");
@@ -75,18 +84,10 @@ namespace Heist
                 Rolodex.TeamMembers.Remove(Rolodex.TeamMembers[index]);
                 //Remove team members from possible selection if selecting them would cause percentage cut to go over 100
                 foreach (IRobber robber in Rolodex.TeamMembers.ToList()) {
-                    if (robber.PercentageCut + Rolodex.TotalPercentageCut() > 100) {
+                    if (robber.PercentageCut + Crew.TotalPercentageCut() > 100) {
                         Rolodex.TeamMembers.Remove(robber);
                     }
                 }
-                }
-                Console.WriteLine("Your Team: ");
-                foreach(IRobber robber in Crew.TeamMembers){
-                    Console.WriteLine($"{robber}");
-                }
-                Console.WriteLine($"Your Cut: {100-Crew.TotalPercentageCut()}%");
-                if (Rolodex.TeamMembers.Count == 0){
-                    break;
                 }
             }
 
