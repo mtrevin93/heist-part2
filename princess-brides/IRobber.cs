@@ -2,9 +2,9 @@ namespace Heist
 {
     interface IRobber
     {
-        string Name;
-        int SkillLevel;
-        int PercentageCut;
-        void PerformSkill(bank bank);
+        string Name { get; set; }
+        int SkillLevel { get; set; }
+        int PercentageCut {get; set; }
+        void PerformSkill(Bank bank);
     }
 }
