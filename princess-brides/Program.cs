@@ -10,7 +10,7 @@ namespace princess_brides
             Console.WriteLine("Bank Difficulty Level: ");
             bank.difficultyLevel = int.Parse(Console.ReadLine());
             Console.WriteLine("Plan your Heist!");
-
+            Console.WriteLine(bank.IsSecure);
             Team HeistTeam = new Team();
             //Run until user does not enter name
             while (true)
