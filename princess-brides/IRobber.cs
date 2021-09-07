@@ -1,6 +1,6 @@
 namespace Heist
 {
-    interface IRobber
+    public interface IRobber
     {
         string Name { get; set; }
         int SkillLevel { get; set; }

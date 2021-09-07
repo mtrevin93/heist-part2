@@ -8,20 +8,20 @@ namespace Heist
         static void Main(string[] args)
         {
             //Create a team
-            List<IRobber> Rolodex = new List<IRobber>();
+            Team Rolodex = new Team();
             Hacker Kevin = new Hacker() { Name = "Kevin", SkillLevel = 95, PercentageCut = 10 };
             Muscle Cena = new Muscle() { Name = "Cena", SkillLevel = 100, PercentageCut = 15 };
             LockSpecialist Rouge = new LockSpecialist() { Name = "Rouge", SkillLevel = 105, PercentageCut = 20 };
-            Rolodex.Add(Kevin);
-            Rolodex.Add(Cena);
-            Rolodex.Add(Rouge);
+            Rolodex.TeamMembers.Add(Kevin);
+            Rolodex.TeamMembers.Add(Cena);
+            Rolodex.TeamMembers.Add(Rouge);
             // Run until user does not enter name
             while (true)
             {
                 {
-                    Console.WriteLine($"There are currently {Rolodex.Count} robbers to choose from.");
-                    for(int i = 0; i < Rolodex.Count; i++){
-                        Console.WriteLine($"{i+1}) {Rolodex[i]}");
+                    Console.WriteLine($"There are currently {Rolodex.TeamMembers.Count} robbers to choose from.");
+                    for(int i = 0; i < Rolodex.TeamMembers.Count; i++){
+                        Console.WriteLine($"{i+1}) {Rolodex.TeamMembers[i]}");
                     }
                     Console.WriteLine("Please enter a new potential team member's name.");
 
@@ -42,22 +42,34 @@ namespace Heist
                     //Instantiate new member based on selected class
                     if (memberType == 1){
                         Hacker Robber = new Hacker() { Name = robberName, SkillLevel = memberSkillLevel, PercentageCut = memberCutPercentage };
-                        Rolodex.Add(Robber);
+                        Rolodex.TeamMembers.Add(Robber);
                     }
                     if (memberType == 2){
                         Muscle Robber = new Muscle() { Name = robberName, SkillLevel = memberSkillLevel, PercentageCut = memberCutPercentage };
-                        Rolodex.Add(Robber);
+                        Rolodex.TeamMembers.Add(Robber);
                     }
                     if (memberType == 3){
                         LockSpecialist Robber = new LockSpecialist() { Name = robberName, SkillLevel = memberSkillLevel, PercentageCut = memberCutPercentage };
-                        Rolodex.Add(Robber);
+                        Rolodex.TeamMembers.Add(Robber);
                     }
                 }
             }
-            //Create a new bank
+            //Users get report from bank, then choose which robbers to add to their crew
+            List<IRobber> Crew = new List<IRobber>();
             Bank bank = new Bank();
             bank.ReconReport();
             Console.WriteLine("\nPlan your Heist!");
+            while(true)
+            {   
+                Console.WriteLine($"There are currently {Rolodex.TeamMembers.Count} robbers to choose from.");
+                for(int i = 0; i < Rolodex.TeamMembers.Count; i++){
+                Console.WriteLine($"{i+1}) {Rolodex.TeamMembers[i]}");
+
+                Console.WriteLine("Enter a member's number to add them to your team: ");
+                int index = int.Parse(Console.ReadLine());
+                Crew.Add(Rolodex.TeamMembers[index]);
+                Rolodex.TeamMembers.Remove(Rolodex.TeamMembers[index]);
+            }
 
             // Prompt user for number of trial runs
             Console.WriteLine("Number of trial runs?");
@@ -65,7 +77,7 @@ namespace Heist
             int Total = 0;
             int successes = 0;
             int failures = 0;
-            foreach (IRobber robber in Rolodex)
+            foreach (IRobber robber in Rolodex.TeamMembers)
             {
                 Total += robber.SkillLevel;
             }
@@ -89,4 +101,5 @@ namespace Heist
              Console.WriteLine($"Successes: {successes} Failures: {failures}");
         }
     }
+}
 }
