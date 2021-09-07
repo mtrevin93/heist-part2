@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Heist
 {
@@ -55,20 +56,38 @@ namespace Heist
                 }
             }
             //Users get report from bank, then choose which robbers to add to their crew
-            List<IRobber> Crew = new List<IRobber>();
+            Team Crew = new Team();
             Bank bank = new Bank();
             bank.ReconReport();
-            Console.WriteLine("\nPlan your Heist!");
             while(true)
             {   
                 Console.WriteLine($"There are currently {Rolodex.TeamMembers.Count} robbers to choose from.");
                 for(int i = 0; i < Rolodex.TeamMembers.Count; i++){
-                Console.WriteLine($"{i+1}) {Rolodex.TeamMembers[i]}");
-
+                    Console.WriteLine($"{i+1}) {Rolodex.TeamMembers[i]}");
+                    }
                 Console.WriteLine("Enter a member's number to add them to your team: ");
-                int index = int.Parse(Console.ReadLine());
-                Crew.Add(Rolodex.TeamMembers[index]);
+                string response = Console.ReadLine();
+                if (response == ""){
+                    break; }
+                else {
+                int index = int.Parse(response) - 1;
+                Crew.TeamMembers.Add(Rolodex.TeamMembers[index]);
                 Rolodex.TeamMembers.Remove(Rolodex.TeamMembers[index]);
+                //Remove team members from possible selection if selecting them would cause percentage cut to go over 100
+                foreach (IRobber robber in Rolodex.TeamMembers.ToList()) {
+                    if (robber.PercentageCut + Rolodex.TotalPercentageCut() > 100) {
+                        Rolodex.TeamMembers.Remove(robber);
+                    }
+                }
+                }
+                Console.WriteLine("Your Team: ");
+                foreach(IRobber robber in Crew.TeamMembers){
+                    Console.WriteLine($"{robber}");
+                }
+                Console.WriteLine($"Your Cut: {100-Crew.TotalPercentageCut()}%");
+                if (Rolodex.TeamMembers.Count == 0){
+                    break;
+                }
             }
 
             // Prompt user for number of trial runs
@@ -102,4 +121,4 @@ namespace Heist
         }
     }
 }
-}
+
