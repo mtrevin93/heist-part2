@@ -7,15 +7,11 @@ namespace Heist
     {
         static void Main(string[] args)
         {
-            //Create a new bank
-            Bank bank = new Bank();
-            bank.ReconReport();
-            Console.WriteLine("Plan your Heist! \n");
             //Create a team
             List<IRobber> Rolodex = new List<IRobber>();
-            Hacker Kevin = new Hacker() { Name = "Kevin", PercentageCut = 15 };
-            Muscle Cena = new Muscle() { Name = "Cena", PercentageCut = 20 };
-            LockSpecialist Rouge = new LockSpecialist() { Name = "Rouge", PercentageCut = 25 };
+            Hacker Kevin = new Hacker() { Name = "Kevin", SkillLevel = 95, PercentageCut = 10 };
+            Muscle Cena = new Muscle() { Name = "Cena", SkillLevel = 100, PercentageCut = 15 };
+            LockSpecialist Rouge = new LockSpecialist() { Name = "Rouge", SkillLevel = 105, PercentageCut = 20 };
             Rolodex.Add(Kevin);
             Rolodex.Add(Cena);
             Rolodex.Add(Rouge);
@@ -23,8 +19,11 @@ namespace Heist
             while (true)
             {
                 {
-                    Console.WriteLine($"There are currently {Rolodex.Count} robbers in this heist.");
-                    Console.WriteLine("Please enter your team member's name.");
+                    Console.WriteLine($"There are currently {Rolodex.Count} robbers to choose from.");
+                    for(int i = 0; i < Rolodex.Count; i++){
+                        Console.WriteLine($"{i+1}) {Rolodex[i]}");
+                    }
+                    Console.WriteLine("Please enter a new potential team member's name.");
 
                     string robberName = Console.ReadLine();
                     if (robberName == "")
@@ -55,7 +54,11 @@ namespace Heist
                     }
                 }
             }
-            Console.WriteLine(Rolodex.Count);
+            //Create a new bank
+            Bank bank = new Bank();
+            bank.ReconReport();
+            Console.WriteLine("\nPlan your Heist!");
+
             // Prompt user for number of trial runs
             Console.WriteLine("Number of trial runs?");
             int numRuns = int.Parse(Console.ReadLine());

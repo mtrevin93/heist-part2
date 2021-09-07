@@ -8,15 +8,13 @@ namespace Heist
 
         public int SkillLevel { get; set; }
 
-        public float CourageFactor { get; set; }
-
         public Robber() {}
 
         public override string ToString()
         {
             return (
-                $"Name - {Name}, Skill Level - {SkillLevel},  Courage Factor - {CourageFactor}"
-                    );
+                $"Name - {Name}, Skill Level - {SkillLevel}"
+            );
         }
     }
 }
