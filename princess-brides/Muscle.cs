@@ -7,19 +7,19 @@ namespace Heist
     {
         public void PerformSkill(Bank bank)
         {
-            bank.SecurityGuardScore = bank.SecurityGuardScore - 50;
+            bank.SecurityGuardScore = bank.SecurityGuardScore - SkillLevel;
             if (bank.SecurityGuardScore <= 0) {
                 Console.WriteLine($"{Name} beat up all of the security guards!");
             }
             else {
-                Console.WriteLine($"{Name} is taking care of the security guards! Decreased security by 50 points.");
+                Console.WriteLine($"{Name} is taking care of the security guards! Decreased security by {SkillLevel} points.");
             }
         }
-        public int PercentageCut { get; set; }
+        public double PercentageCut { get; set; }
         public override string ToString()
         {
             return (
-                $"Name - {Name}, Specialty - Muscle, Skill Level - {SkillLevel},  Cut - {PercentageCut}%"
+                $"Name - {Name}, Specialty - Muscle, Skill Level - {SkillLevel},  Cut - {PercentageCut*100}%"
                 );
         }
     }   

@@ -7,19 +7,19 @@ namespace Heist
     {
         public void PerformSkill(Bank bank)
         {
-            bank.VaultScore = bank.VaultScore - 50;
+            bank.VaultScore = bank.VaultScore - SkillLevel;
             if (bank.VaultScore <= 0) {
                 Console.WriteLine($"{Name} has cracked the vault code!");
             }
             else {
-                Console.WriteLine($"{Name} is cracking the vault code! Decreased security by 50 points.");
+                Console.WriteLine($"{Name} is cracking the vault code! Decreased security by {SkillLevel} points.");
             }
         }
-        public int PercentageCut { get; set; }
+        public double PercentageCut { get; set; }
         public override string ToString()
         {
             return (
-                $"Name - {Name}, Specialty - Lock Specialist, Skill Level - {SkillLevel},  Cut - {PercentageCut}%"
+                $"Name - {Name}, Specialty - Lock Specialist, Skill Level - {SkillLevel},  Cut - {PercentageCut*100}%"
                 );
         }
     }   

@@ -10,9 +10,9 @@ namespace Heist
         {
             //Create a team
             Team Rolodex = new Team();
-            Hacker Kevin = new Hacker() { Name = "Kevin", SkillLevel = 95, PercentageCut = 10 };
-            Muscle Cena = new Muscle() { Name = "Cena", SkillLevel = 100, PercentageCut = 15 };
-            LockSpecialist Rouge = new LockSpecialist() { Name = "Rouge", SkillLevel = 105, PercentageCut = 20 };
+            Hacker Kevin = new Hacker() { Name = "Kevin", SkillLevel = 50, PercentageCut = .10 };
+            Muscle Cena = new Muscle() { Name = "Cena", SkillLevel = 55, PercentageCut = .15 };
+            LockSpecialist Rouge = new LockSpecialist() { Name = "Rouge", SkillLevel = 60, PercentageCut = .20 };
             Rolodex.TeamMembers.Add(Kevin);
             Rolodex.TeamMembers.Add(Cena);
             Rolodex.TeamMembers.Add(Rouge);
@@ -38,7 +38,7 @@ namespace Heist
                     int memberSkillLevel = int.Parse(Console.ReadLine());
 
                     Console.WriteLine("Please enter their required percentage of cut (1-100).");
-                    int memberCutPercentage = int.Parse(Console.ReadLine());
+                    double memberCutPercentage = double.Parse(Console.ReadLine())/100;
 
                     //Instantiate new member based on selected class
                     if (memberType == 1){
@@ -65,7 +65,7 @@ namespace Heist
                 foreach(IRobber robber in Crew.TeamMembers){
                     Console.WriteLine($"{robber}");
                 }
-                Console.WriteLine($"Your Cut: {100-Crew.TotalPercentageCut()}%");
+                Console.WriteLine($"Your Cut: {(1-Crew.TotalPercentageCut())*100}%");
                 Console.WriteLine("-----------------------------------------------");
                 if (Rolodex.TeamMembers.Count == 0){
                     break;
@@ -84,41 +84,27 @@ namespace Heist
                 Rolodex.TeamMembers.Remove(Rolodex.TeamMembers[index]);
                 //Remove team members from possible selection if selecting them would cause percentage cut to go over 100
                 foreach (IRobber robber in Rolodex.TeamMembers.ToList()) {
-                    if (robber.PercentageCut + Crew.TotalPercentageCut() > 100) {
+                    if ((robber.PercentageCut + Crew.TotalPercentageCut())*100 > 100) {
                         Rolodex.TeamMembers.Remove(robber);
                     }
                 }
                 }
             }
 
-            // Prompt user for number of trial runs
-            Console.WriteLine("Number of trial runs?");
-            int numRuns = int.Parse(Console.ReadLine());
-            int Total = 0;
-            int successes = 0;
-            int failures = 0;
-            foreach (IRobber robber in Rolodex.TeamMembers)
+            // Assess for success or failure
+            foreach (IRobber robber in Crew.TeamMembers)
             {
-                Total += robber.SkillLevel;
+                robber.PerformSkill(bank);
             }
-            //Runs randomized trial runs
-            for (int i = 0; i < numRuns; i++)
-                {
-                int thisRunsDifficulty = bank.newLuckValue();
-                if (Total >= thisRunsDifficulty)
-                {
-                    Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {thisRunsDifficulty}.");
-                    Console.WriteLine("Success!");
-                    successes++;
-                }
-                else
-                {
-                    Console.WriteLine($"The team's combined skill level: {Total}. The bank's difficulty level: {thisRunsDifficulty}.");
-                    Console.WriteLine("Failure!");
-                    failures++;
-                }
+            if (bank.IsSecure) {
+                Console.WriteLine("Busted! Better luck next time.");
             }
-             Console.WriteLine($"Successes: {successes} Failures: {failures}");
+            else {
+                foreach(IRobber robber in Crew.TeamMembers){
+                    Console.WriteLine($"{robber.Name}'s cut is {(robber.PercentageCut)*bank.CashOnHand}");
+                }
+            Console.WriteLine($"Your cut is {(1-Crew.TotalPercentageCut())*bank.CashOnHand}");
+            }
         }
     }
 }

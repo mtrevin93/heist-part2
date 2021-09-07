@@ -12,9 +12,9 @@ namespace Heist
         {
            TeamMembers = new List<IRobber>();   
         }
-        public int TotalPercentageCut()
+        public double TotalPercentageCut()
         {
-            IEnumerable<int> totalCutIE = TeamMembers.Select(m => m.PercentageCut);
+            IEnumerable<double> totalCutIE = TeamMembers.Select(m => m.PercentageCut);
             return totalCutIE.Sum();
         }
     }
