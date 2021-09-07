@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace princess_brides
+namespace Heist
 {
     class Program
     {

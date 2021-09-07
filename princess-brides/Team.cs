@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace princess_brides
+namespace Heist
 {
     public class Team
     {
